@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    app:cardBackgroundColor="#D1DBE4"
+    app:cardElevation="0dp"
+
+    app:cardCornerRadius="6dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView42"
+            android:layout_width="101dp"
+            android:layout_height="106dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/rectangle_40__fear1_" />
+
+        <TextView
+            android:id="@+id/text_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:text="35.000  VND"
+            android:textColor="#B5B821"
+            app:layout_constraintStart_toEndOf="@+id/imageView42"
+            app:layout_constraintTop_toBottomOf="@+id/text_item_name"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/image_item"
+            android:layout_width="82dp"
+            android:layout_height="94dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView42"
+            app:layout_constraintStart_toStartOf="@+id/imageView42"
+            app:layout_constraintTop_toTopOf="@+id/imageView42"
+            app:srcCompat="@drawable/pngtree_hamburger_png_image_5966599_removebg_preview"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/text_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Cheese Burrger"
+            android:textColor="#000000"
+            android:textSize="16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageView42"
+            app:layout_constraintTop_toTopOf="@+id/imageView42" />
+
+        <ImageView
+            android:id="@+id/imageView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/iconoir_delete_circle" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="214dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Big burger with cheese, lettuce, tomato, onions and special sauce"
+            android:textColor="#726C6C"
+            app:layout_constraintStart_toEndOf="@+id/imageView42"
+            app:layout_constraintTop_toBottomOf="@+id/text_item_price" />
+
+        <ImageView
+            android:id="@+id/imageView16"
+            android:layout_width="26dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView14"
+            app:srcCompat="@drawable/material_symbols_shopping_cart_outline_sharp__black_" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
