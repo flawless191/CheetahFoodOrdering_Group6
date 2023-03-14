@@ -7,12 +7,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.cheetahfoodordering.adapters.ItemAdapter;
+import com.example.cheetahfoodordering.database.AppDatabase;
 import com.example.cheetahfoodordering.models.Item;
 import com.example.cheetahfoodordering.ui.CartFragment;
 import com.example.cheetahfoodordering.ui.FavoriteFragment;
@@ -29,11 +31,14 @@ public class MainActivity extends AppCompatActivity {
     private ImageView foodType;
     FragmentManager fragmentManage;
     FragmentTransaction fragmentTransaction;
-
+    AppDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db = Room.databaseBuilder(this,
+                AppDatabase.class, "foodorderdb").allowMainThreadQueries().build();
+
         addFragment( new HomeFragment());
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnItemSelectedListener(item -> {
