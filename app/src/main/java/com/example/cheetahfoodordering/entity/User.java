@@ -18,14 +18,24 @@ public class User {
     public String address;
     @ColumnInfo(name = "password")
     public String password;
+    @ColumnInfo(name = "isAdmin")
+    public String isAdmin;
 
-    public User(int user_id, String user_email, String user_phone, String full_name, String address, String password) {
-        this.user_id = user_id;
+    public User(String user_email, String user_phone, String full_name, String address, String password, String isAdmin) {
         this.user_email = user_email;
         this.user_phone = user_phone;
         this.full_name = full_name;
         this.address = address;
         this.password = password;
+        this.isAdmin = isAdmin;
+    }
+
+    public String getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(String isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public int getUser_id() {
