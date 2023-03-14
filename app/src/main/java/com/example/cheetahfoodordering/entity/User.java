@@ -1,4 +1,4 @@
-package com.example.cheetahfoodordering.models;
+package com.example.cheetahfoodordering.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

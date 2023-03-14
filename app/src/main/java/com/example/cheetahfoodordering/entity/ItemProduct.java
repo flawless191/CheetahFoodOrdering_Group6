@@ -1,9 +1,11 @@
-package com.example.cheetahfoodordering.models;
+package com.example.cheetahfoodordering.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+
+import com.example.cheetahfoodordering.entity.Category;
 
 @Entity(tableName = "itemproducts", foreignKeys = @ForeignKey(entity = Category.class, parentColumns = "category_id", childColumns = "category_id"))
 public class ItemProduct {

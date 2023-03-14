@@ -1,8 +1,11 @@
-package com.example.cheetahfoodordering.models;
+package com.example.cheetahfoodordering.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+
+import com.example.cheetahfoodordering.entity.ItemProduct;
+import com.example.cheetahfoodordering.entity.Order;
 
 @Entity(tableName = "order_details",primaryKeys = {"order_id", "product_id"}, foreignKeys = {@ForeignKey(entity = Order.class,parentColumns = "order_id",childColumns = "order_id"),@ForeignKey(entity = ItemProduct.class,parentColumns = "product_id",childColumns = "product_id")})
 public class OrderDetail {
