@@ -30,6 +30,14 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
+    public User() {
+    }
+
+    public User(String user_email, String user_phone) {
+        this.user_email = user_email;
+        this.user_phone = user_phone;
+    }
+
     public String getIsAdmin() {
         return isAdmin;
     }
