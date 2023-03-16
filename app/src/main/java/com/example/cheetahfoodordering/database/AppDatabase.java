@@ -6,6 +6,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.cheetahfoodordering.dao.CategoryDao;
+import com.example.cheetahfoodordering.dao.ItemProductDao;
 import com.example.cheetahfoodordering.dao.UserDao;
 import com.example.cheetahfoodordering.entity.Category;
 import com.example.cheetahfoodordering.entity.ItemProduct;
@@ -18,8 +20,8 @@ import com.example.cheetahfoodordering.entity.User;
 public abstract class AppDatabase extends RoomDatabase {
     private static final String dbName="foodorderdb";
     private static AppDatabase appDatabase;
-//    public abstract ItemProductDAO ItemProductDAO();
-//    public abstract CategoryDAO categoryDAO();
+    public abstract ItemProductDao ItemProductDao();
+    public abstract CategoryDao categoryDao();
     public abstract UserDao userDao();
 
     public static synchronized AppDatabase getAppDatabase(Context context){

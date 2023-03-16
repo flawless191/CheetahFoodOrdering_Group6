@@ -8,7 +8,7 @@
     tools:context=".activities.WelcomeActivity">
 
     <ImageView
-        android:id="@+id/imageView15"
+        android:id="@+id/image_logo"
         android:layout_width="288dp"
         android:layout_height="284dp"
         android:layout_marginTop="45dp"
@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+        app:layout_constraintTop_toBottomOf="@+id/image_logo" />
 
     <TextView
         android:id="@+id/textView25"

@@ -52,7 +52,7 @@
         app:srcCompat="@drawable/rectangle_23" />
 
     <ImageView
-        android:id="@+id/imageView12"
+        android:id="@+id/img_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -68,7 +68,7 @@
         android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView12"
+        app:layout_constraintTop_toBottomOf="@+id/img_add"
         app:srcCompat="@drawable/rectangle_23" />
 
     <ImageView
@@ -197,9 +197,9 @@
         android:inputType="phone"
         android:textColor="#000000"
         android:textColorHint="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/imageView12"
+        app:layout_constraintEnd_toEndOf="@+id/img_add"
         app:layout_constraintHorizontal_bias="0.671"
-        app:layout_constraintStart_toStartOf="@+id/imageView12"
+        app:layout_constraintStart_toStartOf="@+id/img_add"
         app:layout_constraintTop_toBottomOf="@+id/edt_email" />
 
     <ImageView
@@ -233,8 +233,8 @@
         android:layout_height="30dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="@+id/imageView12"
-        app:layout_constraintTop_toTopOf="@+id/imageView12"
+        app:layout_constraintStart_toStartOf="@+id/img_add"
+        app:layout_constraintTop_toTopOf="@+id/img_add"
         app:srcCompat="@drawable/material_symbols_phone_android_outline" />
 
     <EditText

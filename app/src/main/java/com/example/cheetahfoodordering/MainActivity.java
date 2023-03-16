@@ -9,17 +9,19 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.cheetahfoodordering.adapters.ItemAdapter;
+import com.example.cheetahfoodordering.activities.UpdateProductActivity;
 import com.example.cheetahfoodordering.database.AppDatabase;
-import com.example.cheetahfoodordering.models.Item;
+import com.example.cheetahfoodordering.entity.ItemProduct;
 import com.example.cheetahfoodordering.ui.CartFragment;
 import com.example.cheetahfoodordering.ui.FavoriteFragment;
 import com.example.cheetahfoodordering.ui.HistoryOrderFragment;
 import com.example.cheetahfoodordering.ui.HomeFragment;
+import com.example.cheetahfoodordering.ui.ItemDetailFragment;
 import com.example.cheetahfoodordering.ui.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -36,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        db = Room.databaseBuilder(this,
-                AppDatabase.class, "foodorderdb").allowMainThreadQueries().build();
+//        db = Room.databaseBuilder(this,
+//                AppDatabase.class, "foodorderdb").allowMainThreadQueries().build();
 
         addFragment( new HomeFragment());
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void replaceFragment(Fragment fragment){
+    public void replaceFragment(Fragment fragment){
         fragmentManage = getSupportFragmentManager();
         fragmentTransaction = fragmentManage.beginTransaction();
         fragmentTransaction.replace( R.id.frame_layout, fragment);
@@ -77,11 +79,37 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void addFragment(Fragment fragment){
+    public void addFragment(Fragment fragment){
         fragmentManage = getSupportFragmentManager();
         fragmentTransaction = fragmentManage.beginTransaction();
         fragmentTransaction.add( R.id.frame_layout, fragment);
         fragmentTransaction.commit();
+
+    }
+
+    public void  onClickItemDetail(ItemProduct itemProduct){
+        fragmentManage = getSupportFragmentManager();
+        fragmentTransaction = fragmentManage.beginTransaction();
+        ItemDetailFragment itemDetailFragment = new ItemDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("obj_item",itemProduct);
+        itemDetailFragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.frame_layout, itemDetailFragment);
+
+        fragmentTransaction.setReorderingAllowed(true);
+        fragmentTransaction.addToBackStack("replacement");
+        fragmentTransaction.commit();
+
+    }
+
+    public void  itemManageOnClick(ItemProduct itemProduct){
+        fragmentManage = getSupportFragmentManager();
+        fragmentTransaction = fragmentManage.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("obj_item_manage",itemProduct);
+        Intent intent = new Intent(MainActivity.this, UpdateProductActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
 
     }
 }
