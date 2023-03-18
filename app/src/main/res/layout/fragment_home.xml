@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#D1DBE4"
     tools:ignore="ExtraText">
 
     <!-- TODO: Update blank fragment layout -->
@@ -37,7 +38,7 @@
             tools:ignore="MissingConstraints" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/img_search"
             android:layout_width="33dp"
             android:layout_height="36dp"
             android:layout_marginTop="6dp"
@@ -48,15 +49,17 @@
 
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/edt_search"
             android:layout_width="208dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:background="@null"
             android:ems="10"
+            android:hint="Search"
             android:inputType="textPersonName"
-            android:text="Search"
             android:textColor="#000000"
+            android:textColorHighlight="#000000"
+            android:textColorHint="#000000"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintHorizontal_bias="0.279"
             app:layout_constraintStart_toStartOf="@+id/imageView"
@@ -83,7 +86,7 @@
             app:srcCompat="@drawable/material_symbols_menu" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/txt_number_in_list"
             android:layout_width="60dp"
             android:layout_height="25dp"
             android:layout_marginStart="8dp"
@@ -283,7 +286,6 @@
 
             android:layout_marginTop="30dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.493"

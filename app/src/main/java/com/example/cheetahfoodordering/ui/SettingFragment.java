@@ -14,6 +14,11 @@ import android.widget.TextView;
 import com.example.cheetahfoodordering.MainActivity;
 import com.example.cheetahfoodordering.R;
 import com.example.cheetahfoodordering.activities.AddProductActivity;
+import com.example.cheetahfoodordering.dao.ItemProductDao;
+import com.example.cheetahfoodordering.database.AppDatabase;
+import com.example.cheetahfoodordering.entity.ItemProduct;
+
+import java.util.List;
 
 
 public class SettingFragment extends Fragment {
@@ -37,7 +42,10 @@ public class SettingFragment extends Fragment {
         txtManage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.replaceFragment(new ManageProductFragment());
+                AppDatabase db = AppDatabase.getAppDatabase(rootView.getContext());
+                ItemProductDao itemProductDao = db.ItemProductDao();
+        List<ItemProduct> itemProductList = itemProductDao.getAllProduct();
+                mainActivity.replaceFragment(new ManageProductFragment(itemProductList));
             }
         });
         return rootView;

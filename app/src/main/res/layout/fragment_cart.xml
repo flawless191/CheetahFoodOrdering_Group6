@@ -32,7 +32,7 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/img_search"
         android:layout_width="33dp"
         android:layout_height="36dp"
         android:layout_marginTop="6dp"
@@ -42,7 +42,7 @@
         app:srcCompat="@drawable/material_symbols_search" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/edt_search"
         android:layout_width="208dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
@@ -68,7 +68,7 @@
         app:srcCompat="@drawable/material_symbols_menu" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txt_number_in_list"
         android:layout_width="176dp"
         android:layout_height="25dp"
         android:layout_marginStart="24dp"

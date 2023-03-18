@@ -25,4 +25,10 @@ public interface ItemProductDao {
     @Query("SELECT * FROM itemproducts WHERE category_id = :categoryId")
     List<ItemProduct> getProductWithCategory(int categoryId);
 
+    @Query("SELECT * FROM itemproducts WHERE product_name LIKE :productName")
+    List<ItemProduct> getListSearchProduct(String productName);
+
+    @Query("SELECT  *, count(*) AS Total FROM favorite INNER JOIN itemproducts ON favorite.product_id = itemproducts.product_id GROUP BY favorite.product_id ORDER BY Total DESC LIMIT 2")
+    List<ItemProduct> getTop2FavoriteProduct();
+
 }

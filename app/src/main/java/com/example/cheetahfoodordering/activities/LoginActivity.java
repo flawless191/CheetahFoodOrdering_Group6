@@ -37,7 +37,15 @@ public class LoginActivity extends AppCompatActivity {
         edt_phone= findViewById(R.id.edt_login_phone);
         edt_password = findViewById(R.id.edt_login_password);
         cb_remember = findViewById(R.id.che_remember);
-
+        SharedPreferences sharedPreferences = getSharedPreferences("user_account", MODE_PRIVATE);
+        if (sharedPreferences.getString("userRememberPhone",null)!=null){
+            String userPhone = sharedPreferences.getString("userRememberPhone",null);
+            edt_phone.setText(userPhone);
+            String pass = sharedPreferences.getString("userRememberPassword",null);
+            edt_password.setText(pass);
+            boolean isSave = sharedPreferences.getBoolean("isSave",false);
+            cb_remember.setChecked(isSave);
+        }
         ((Button)findViewById(R.id.btn_login)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

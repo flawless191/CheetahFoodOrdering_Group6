@@ -122,10 +122,8 @@ public class UpdateProductActivity extends AppCompatActivity {
                     itemUpdateProduct.setQuantity(productQuantity);
                     itemUpdateProduct.setRate(productRate);
                     itemUpdateProduct.setCategory_id(categoryId);
-                    Toast.makeText(v.getContext(), "mess !"+productImage, Toast.LENGTH_SHORT).show();
                     AppDatabase appDatabase = AppDatabase.getAppDatabase(v.getContext());
                     ItemProductDao itemProductDao = appDatabase.ItemProductDao();
-//                    itemProductDao.insertProduct(itemUpdateProduct);
                     itemProductDao.updateProduct(itemUpdateProduct);
                     Toast.makeText(v.getContext(), "Update successful!", Toast.LENGTH_SHORT).show();
                 }

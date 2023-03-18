@@ -13,7 +13,7 @@
         android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView14"
+        app:layout_constraintTop_toBottomOf="@+id/img_delete"
         app:srcCompat="@drawable/rectangle_23" />
 
     <TextView
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edt_confirm_register_passworrd" />
 
     <ImageView
-        android:id="@+id/imageView14"
+        android:id="@+id/img_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -112,9 +112,9 @@
         android:inputType="textPassword"
         android:textColor="#000000"
         android:textColorHint="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/imageView14"
+        app:layout_constraintEnd_toEndOf="@+id/img_delete"
         app:layout_constraintHorizontal_bias="0.703"
-        app:layout_constraintStart_toStartOf="@+id/imageView14"
+        app:layout_constraintStart_toStartOf="@+id/img_delete"
         app:layout_constraintTop_toBottomOf="@+id/edt_address" />
 
     <EditText
@@ -148,7 +148,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edt_phone" />
 
     <ImageView
-        android:id="@+id/imageView16"
+        android:id="@+id/img_cart"
         android:layout_width="32dp"
         android:layout_height="37dp"
         android:layout_marginStart="4dp"
@@ -163,8 +163,8 @@
         android:layout_height="35dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="3dp"
-        app:layout_constraintStart_toStartOf="@+id/imageView14"
-        app:layout_constraintTop_toTopOf="@+id/imageView14"
+        app:layout_constraintStart_toStartOf="@+id/img_delete"
+        app:layout_constraintTop_toTopOf="@+id/img_delete"
         app:srcCompat="@drawable/mdi_password_outline" />
 
     <ImageView

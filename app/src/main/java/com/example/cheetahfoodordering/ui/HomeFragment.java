@@ -7,10 +7,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.cheetahfoodordering.MainActivity;
 import com.example.cheetahfoodordering.R;
@@ -34,9 +37,14 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public HomeFragment( int categoryId) {
+//    public HomeFragment( List<ItemProduct> itemProductListQuery) {
+//
+//        this.itemProductList = itemProductListQuery;
+//    }
 
-        this.categoryId = categoryId;
+
+    public HomeFragment( List<ItemProduct> itemProductList) {
+        this.itemProductList = itemProductList;
     }
 
     @SuppressLint("MissingInflatedId")
@@ -47,71 +55,89 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         db= AppDatabase.getAppDatabase(rootView.getContext());
         ItemProductDao itemProductDao = db.ItemProductDao();
-        itemProductList= itemProductDao.getAllProduct();
 
         mainActivity = (MainActivity) getActivity();
         recyclerViewItem = rootView.findViewById(R.id.recyclerItem);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(rootView.getContext(),2);
         recyclerViewItem.setLayoutManager(gridLayoutManager);
         recyclerViewItem.setNestedScrollingEnabled(false);
-        if(categoryId ==1) {
-            itemProductList = itemProductDao.getProductWithCategory(1);
-
-        }
-        switch (categoryId){
-            case 1:
-                itemProductList = itemProductDao.getProductWithCategory(1);
-                break;
-            case 2:
-                itemProductList = itemProductDao.getProductWithCategory(2);
-                break;
-            case 3:
-                itemProductList = itemProductDao.getProductWithCategory(3);
-                break;
-            default:
-                itemProductList= itemProductDao.getAllProduct();
-                break;
-        }
-        ItemProductAdapter itemProductAdapter = new ItemProductAdapter(itemProductList, new ItemProductAdapter.ItemDetailOnClick() {
+//        if(categoryId ==1) {
+//            itemProductList = itemProductDao.getProductWithCategory(1);
+//
+//        }
+//        switch (categoryId){
+//            case 1:
+//                itemProductList = itemProductDao.getProductWithCategory(1);
+//                break;
+//            case 2:
+//                itemProductList = itemProductDao.getProductWithCategory(2);
+//                break;
+//            case 3:
+//                itemProductList = itemProductDao.getProductWithCategory(3);
+//                break;
+//            default:
+//                itemProductList= itemProductDao.getAllProduct();
+//                break;
+//        }
+        ItemProductAdapter itemProductAdapter = new ItemProductAdapter(this.itemProductList, new ItemProductAdapter.ItemDetailOnClick() {
             @Override
             public void onClickItemDetail(ItemProduct itemProduct) {
                 mainActivity.onClickItemDetail(itemProduct);
+            }
+
+            @Override
+            public void onClickFavorite(ItemProduct itemProduct) {
+                mainActivity.itemAddToFavoriteOnClick(itemProduct);
             }
         },rootView.getContext());
         recyclerViewItem.setAdapter(itemProductAdapter);
         ((ImageView)rootView.findViewById(R.id.img_all_category)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemProductList = itemProductDao.getAllProduct();
                 mainActivity = (MainActivity) getActivity();
-                mainActivity.replaceFragment(new HomeFragment(0));
+                List<ItemProduct> listWithCategory= itemProductDao.getAllProduct();
+                mainActivity.replaceFragment(new HomeFragment(listWithCategory));
             }
         });
         ((ImageView)rootView.findViewById(R.id.img_food)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemProductList = itemProductDao.getAllProduct();
                 mainActivity = (MainActivity) getActivity();
-                mainActivity.replaceFragment(new HomeFragment(1));
+                List<ItemProduct> listWithCategory= itemProductDao.getProductWithCategory(1);
+                mainActivity.replaceFragment(new HomeFragment(listWithCategory));
             }
         });
         ((ImageView)rootView.findViewById(R.id.img_drink)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemProductList = itemProductDao.getAllProduct();
                 mainActivity = (MainActivity) getActivity();
-                mainActivity.replaceFragment(new HomeFragment(2));
+                List<ItemProduct> listWithCategory= itemProductDao.getProductWithCategory(2);
+                mainActivity.replaceFragment(new HomeFragment(listWithCategory));
             }
         });
         ((ImageView)rootView.findViewById(R.id.img_other)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemProductList = itemProductDao.getAllProduct();
                 mainActivity = (MainActivity) getActivity();
-                mainActivity.replaceFragment(new HomeFragment(3 ));
+                List<ItemProduct> listWithCategory= itemProductDao.getProductWithCategory(3);
+                mainActivity.replaceFragment(new HomeFragment(listWithCategory));
             }
         });
+        EditText edt_search = rootView.findViewById(R.id.edt_search);
 
+        ((ImageView)rootView.findViewById(R.id.img_search)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(edt_search.getText().toString())){
+                    Toast.makeText(v.getContext(), "Please enter search value", Toast.LENGTH_SHORT).show();
+                }else {
+                    mainActivity = (MainActivity) getActivity();
+                    String productNameSearch = "%" + edt_search.getText().toString()+"%";
+                    List<ItemProduct> listSearch = itemProductDao.getListSearchProduct(productNameSearch);
+                    mainActivity.replaceFragment(new HomeFragment(listSearch));
+                }
+            }
+        });
 
         return rootView;
 

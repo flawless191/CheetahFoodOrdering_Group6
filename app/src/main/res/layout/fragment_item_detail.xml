@@ -42,7 +42,7 @@
             tools:ignore="MissingConstraints" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/img_search"
             android:layout_width="33dp"
             android:layout_height="36dp"
             android:layout_marginTop="8dp"
@@ -52,7 +52,7 @@
             app:srcCompat="@drawable/material_symbols_search" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/edt_search"
             android:layout_width="208dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
@@ -73,7 +73,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="40dp"
             android:src="@drawable/material_symbols_arrow_back"
-            app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName2"
+            app:layout_constraintEnd_toStartOf="@+id/edt_search"
             app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
 
@@ -206,6 +206,7 @@
         android:id="@+id/img_item"
         android:layout_width="match_parent"
         android:layout_height="305dp"
+        android:layout_marginBottom="5dp"
         android:src="@drawable/pngtree_hamburger_png_image_5966599_removebg_preview"
         app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"

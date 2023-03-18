@@ -10,13 +10,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.cheetahfoodordering.activities.UpdateProductActivity;
+import com.example.cheetahfoodordering.dao.FavoriteDao;
+import com.example.cheetahfoodordering.dao.ItemProductDao;
+import com.example.cheetahfoodordering.dao.UserDao;
 import com.example.cheetahfoodordering.database.AppDatabase;
+import com.example.cheetahfoodordering.entity.Favorite;
 import com.example.cheetahfoodordering.entity.ItemProduct;
+import com.example.cheetahfoodordering.entity.User;
 import com.example.cheetahfoodordering.ui.CartFragment;
 import com.example.cheetahfoodordering.ui.FavoriteFragment;
 import com.example.cheetahfoodordering.ui.HistoryOrderFragment;
@@ -33,20 +40,23 @@ public class MainActivity extends AppCompatActivity {
     private ImageView foodType;
     FragmentManager fragmentManage;
     FragmentTransaction fragmentTransaction;
-    AppDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        db = Room.databaseBuilder(this,
 //                AppDatabase.class, "foodorderdb").allowMainThreadQueries().build();
-
-        addFragment( new HomeFragment());
+        AppDatabase appDatabase= AppDatabase.getAppDatabase(this);
+        ItemProductDao itemProductDao = appDatabase.ItemProductDao();
+        List<ItemProduct> listBegin= itemProductDao.getAllProduct();
+        addFragment( new HomeFragment(listBegin));
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.home_item:
-                    replaceFragment( new HomeFragment());
+
+                    List<ItemProduct> listWithCategory= itemProductDao.getAllProduct();
+                    replaceFragment( new HomeFragment(listWithCategory));
 
                     break;
                 case R.id.favorite:
@@ -111,5 +121,39 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtras(bundle);
         startActivity(intent);
 
+    }
+
+
+
+
+    public void  itemAddToFavoriteOnClick(ItemProduct itemProduct){
+        AppDatabase appDatabase = AppDatabase.getAppDatabase(this);
+        FavoriteDao favoriteDao = appDatabase.favoriteDao();
+        Favorite favorite = new Favorite();
+        SharedPreferences sharedPreferences = getSharedPreferences("user_account", MODE_PRIVATE);
+
+        String userPhone = sharedPreferences.getString("userCurrentPhone",null);
+        String pass = sharedPreferences.getString("userCurrentPassword",null);
+        UserDao userDao = appDatabase.userDao();
+        User user = new User();
+        user= userDao.getUserByPhoneAndPassword(userPhone,pass);
+        favorite.setUser_id(user.getUser_id());
+        favorite.setProduct_id(itemProduct.getProduct_id());
+        Favorite favoriteCheck = favoriteDao.getFavoriteWithUserIdAndProductId(user.getUser_id(),itemProduct.getProduct_id());
+        if(favoriteCheck!=null){
+            Toast.makeText(this, "This product already exist in favorite list!", Toast.LENGTH_SHORT).show();
+        }else {
+            favoriteDao.insertAllFavorite(favorite);
+            Toast.makeText(this, "Add to favorite list successfully!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void  deleteItemFromFavoriteOnClick(Favorite favorite){
+        AppDatabase appDatabase = AppDatabase.getAppDatabase(this);
+        FavoriteDao favoriteDao = appDatabase.favoriteDao();
+        favoriteDao.deleteFavorite(favorite);
+        Toast.makeText(this, "Delete successfully!", Toast.LENGTH_SHORT).show();
+        replaceFragment(new FavoriteFragment());
     }
 }
