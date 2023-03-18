@@ -29,7 +29,6 @@ public class AddProductActivity extends AppCompatActivity {
     private EditText edt_product_description;
     private EditText edt_quantity;
     private EditText edt_rate;
-//    private EditText edt_category_id;
     private RadioButton radioButton;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -106,9 +105,6 @@ public class AddProductActivity extends AppCompatActivity {
 
             }
         });
-
-//        radioButton = findViewById(radioId);
-//        Toast.makeText(this,"Selected : "+radioButton.getText().toString(),Toast.LENGTH_SHORT).show();
 
 
 

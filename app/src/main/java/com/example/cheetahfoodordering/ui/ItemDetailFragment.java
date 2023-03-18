@@ -43,7 +43,7 @@ public class ItemDetailFragment extends Fragment {
         txtPrice = rootView.findViewById(R.id.txt_price);
         imageItem = rootView.findViewById(R.id.img_item);
         txtRate = rootView.findViewById(R.id.txt_rate);
-        txtDescription = rootView.findViewById(R.id.txt_description);
+        txtDescription = rootView.findViewById(R.id.txt_user_profile);
         imageBack = rootView.findViewById(R.id.img_back);
         Bundle receiverBundle = getArguments();
         ItemProduct itemProduct = (ItemProduct) receiverBundle.get("obj_item");

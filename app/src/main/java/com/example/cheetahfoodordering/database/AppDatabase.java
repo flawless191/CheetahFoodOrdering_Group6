@@ -9,6 +9,8 @@ import androidx.room.RoomDatabase;
 import com.example.cheetahfoodordering.dao.CategoryDao;
 import com.example.cheetahfoodordering.dao.FavoriteDao;
 import com.example.cheetahfoodordering.dao.ItemProductDao;
+import com.example.cheetahfoodordering.dao.OrderDao;
+import com.example.cheetahfoodordering.dao.OrderDetailDao;
 import com.example.cheetahfoodordering.dao.UserDao;
 import com.example.cheetahfoodordering.entity.Category;
 import com.example.cheetahfoodordering.entity.Favorite;
@@ -26,6 +28,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract CategoryDao categoryDao();
     public abstract UserDao userDao();
     public abstract FavoriteDao favoriteDao();
+    public abstract OrderDao orderDao();
+    public abstract OrderDetailDao orderDetailDao();
     public static synchronized AppDatabase getAppDatabase(Context context){
         if(appDatabase==null){
             appDatabase = Room.databaseBuilder(context,

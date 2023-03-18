@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D1DBE4">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#D1DBE4"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="410dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="1dp"
+            android:background="#291700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="550dp"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/edt_user_address"
+                    android:layout_width="315dp"
+                    android:layout_height="42dp"
+                    android:backgroundTint="#ACA6A6"
+                    android:ems="10"
+                    android:hint="Good"
+                    android:inputType="textPersonName"
+                    android:text="Thach That - Ha Noi"
+                    android:textAllCaps="false"
+                    android:textColor="#5A5858"
+                    android:textColorHighlight="#000000"
+                    android:textColorHint="#000000"
+                    android:textColorLink="#000000"
+                    app:layout_constraintStart_toStartOf="@+id/textView29"
+                    app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+                <EditText
+                    android:id="@+id/edt_user_name"
+                    android:layout_width="315dp"
+                    android:layout_height="42dp"
+                    android:backgroundTint="#ACA6A6"
+                    android:ems="10"
+                    android:hint="Good"
+                    android:inputType="textPersonName"
+                    android:text="Le Tuan Anh"
+                    android:textAllCaps="false"
+                    android:textColor="#5A5858"
+                    android:textColorHighlight="#000000"
+                    android:textColorHint="#000000"
+                    android:textColorLink="#000000"
+                    app:layout_constraintStart_toStartOf="@+id/textView4"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+                <EditText
+                    android:id="@+id/edt_user_phone"
+                    android:layout_width="315dp"
+                    android:layout_height="42dp"
+                    android:backgroundTint="#ACA6A6"
+                    android:ems="10"
+                    android:hint=""
+                    android:inputType="textPersonName"
+                    android:text="0977029425"
+                    android:focusable="false"
+                    android:textAllCaps="false"
+                    android:textColor="#5A5858"
+                    android:textColorHighlight="#000000"
+                    android:textColorHint="#000000"
+                    android:textColorLink="#000000"
+                    app:layout_constraintStart_toStartOf="@+id/textView16"
+                    app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+                <TextView
+                    android:id="@+id/textView29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Address*"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/edt_user_email"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_user_email" />
+
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email*"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/edt_user_phone"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_user_phone" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phone*"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/edt_user_name"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_user_name" />
+
+                <ImageView
+                    android:id="@+id/imageView24"
+                    android:layout_width="241dp"
+                    android:layout_height="137dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/user_icon_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="11dp"
+                    android:text="Full name*"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView24" />
+
+                <EditText
+                    android:id="@+id/edt_user_email"
+                    android:layout_width="315dp"
+                    android:layout_height="42dp"
+                    android:backgroundTint="#ACA6A6"
+                    android:ems="10"
+                    android:hint="Good"
+                    android:inputType="textPersonName"
+                    android:text="tuankaka729@gmail.com"
+                    android:textAllCaps="false"
+                    android:textColor="#5A5858"
+                    android:textColorHighlight="#000000"
+                    android:textColorHint="#000000"
+                    android:textColorLink="#000000"
+                    app:layout_constraintStart_toStartOf="@+id/textView22"
+                    app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <Button
+            android:id="@+id/btn_update_profile"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/rectangle_22"
+
+            android:text="Save"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#FBF9F9"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="11dp"
+            tools:layout_editor_absoluteY="0dp">
+
+        </Button>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="User Infomation"
+        android:textColor="#FDFCFC"
+
+        android:textSize="26dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/img_setting_back"
+        android:layout_width="35dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/material_symbols_arrow_back"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,6 +21,9 @@ public class Order {
         this.isCheckOut = isCheckOut;
     }
 
+    public Order() {
+    }
+
     public int getOrder_id() {
         return order_id;
     }

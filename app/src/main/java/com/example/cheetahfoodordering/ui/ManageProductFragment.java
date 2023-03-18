@@ -51,7 +51,6 @@ public class ManageProductFragment extends Fragment {
         // Inflate the layout for this fragment
         db = AppDatabase.getAppDatabase(rootView.getContext());
         ItemProductDao itemProductDao = db.ItemProductDao();
-//        List<ItemProduct> itemProductList = itemProductDao.getAllProduct();
 
         mainActivity = (MainActivity) getActivity();
         recyclerViewItem = rootView.findViewById(R.id.recyclerItem);

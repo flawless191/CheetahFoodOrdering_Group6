@@ -77,7 +77,7 @@
         app:srcCompat="@drawable/rectangle_23" />
 
     <EditText
-        android:id="@+id/edt_login_password"
+        android:id="@+id/edt_old_password"
         android:layout_width="213dp"
         android:layout_height="48dp"
         android:layout_marginTop="36dp"
@@ -96,7 +96,7 @@
         android:layout_width="37dp"
         android:layout_height="32dp"
         android:layout_marginTop="37dp"
-        app:layout_constraintEnd_toStartOf="@+id/edt_login_password"
+        app:layout_constraintEnd_toStartOf="@+id/edt_old_password"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_login_phone"
@@ -116,7 +116,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.288"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_login_password" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_old_password" />
 
     <TextView
         android:id="@+id/textView"

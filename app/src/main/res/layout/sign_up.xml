@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView13"
+        app:layout_constraintTop_toBottomOf="@+id/img_increase"
         app:srcCompat="@drawable/rectangle_23" />
 
     <ImageView
@@ -62,7 +62,7 @@
         app:srcCompat="@drawable/rectangle_23" />
 
     <ImageView
-        android:id="@+id/imageView13"
+        android:id="@+id/img_increase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -142,9 +142,9 @@
         android:inputType="textPersonName"
         android:textColor="#000000"
         android:textColorHint="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/imageView13"
+        app:layout_constraintEnd_toEndOf="@+id/img_increase"
         app:layout_constraintHorizontal_bias="0.671"
-        app:layout_constraintStart_toStartOf="@+id/imageView13"
+        app:layout_constraintStart_toStartOf="@+id/img_increase"
         app:layout_constraintTop_toBottomOf="@+id/edt_phone" />
 
     <ImageView
@@ -153,8 +153,8 @@
         android:layout_height="37dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="@+id/imageView13"
-        app:layout_constraintTop_toTopOf="@+id/imageView13"
+        app:layout_constraintStart_toStartOf="@+id/img_increase"
+        app:layout_constraintTop_toTopOf="@+id/img_increase"
         app:srcCompat="@drawable/ph_address_book" />
 
     <ImageView

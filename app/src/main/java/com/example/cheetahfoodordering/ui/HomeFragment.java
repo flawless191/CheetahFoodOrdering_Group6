@@ -61,24 +61,7 @@ public class HomeFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(rootView.getContext(),2);
         recyclerViewItem.setLayoutManager(gridLayoutManager);
         recyclerViewItem.setNestedScrollingEnabled(false);
-//        if(categoryId ==1) {
-//            itemProductList = itemProductDao.getProductWithCategory(1);
-//
-//        }
-//        switch (categoryId){
-//            case 1:
-//                itemProductList = itemProductDao.getProductWithCategory(1);
-//                break;
-//            case 2:
-//                itemProductList = itemProductDao.getProductWithCategory(2);
-//                break;
-//            case 3:
-//                itemProductList = itemProductDao.getProductWithCategory(3);
-//                break;
-//            default:
-//                itemProductList= itemProductDao.getAllProduct();
-//                break;
-//        }
+
         ItemProductAdapter itemProductAdapter = new ItemProductAdapter(this.itemProductList, new ItemProductAdapter.ItemDetailOnClick() {
             @Override
             public void onClickItemDetail(ItemProduct itemProduct) {
@@ -88,6 +71,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClickFavorite(ItemProduct itemProduct) {
                 mainActivity.itemAddToFavoriteOnClick(itemProduct);
+            }
+
+            @Override
+            public void onClickAddToCart(ItemProduct itemProduct) {
+                mainActivity.itemAddToCartOnClick(itemProduct);
             }
         },rootView.getContext());
         recyclerViewItem.setAdapter(itemProductAdapter);

@@ -19,10 +19,14 @@ import android.widget.Toast;
 import com.example.cheetahfoodordering.activities.UpdateProductActivity;
 import com.example.cheetahfoodordering.dao.FavoriteDao;
 import com.example.cheetahfoodordering.dao.ItemProductDao;
+import com.example.cheetahfoodordering.dao.OrderDao;
+import com.example.cheetahfoodordering.dao.OrderDetailDao;
 import com.example.cheetahfoodordering.dao.UserDao;
 import com.example.cheetahfoodordering.database.AppDatabase;
 import com.example.cheetahfoodordering.entity.Favorite;
 import com.example.cheetahfoodordering.entity.ItemProduct;
+import com.example.cheetahfoodordering.entity.Order;
+import com.example.cheetahfoodordering.entity.OrderDetail;
 import com.example.cheetahfoodordering.entity.User;
 import com.example.cheetahfoodordering.ui.CartFragment;
 import com.example.cheetahfoodordering.ui.FavoriteFragment;
@@ -156,4 +160,91 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Delete successfully!", Toast.LENGTH_SHORT).show();
         replaceFragment(new FavoriteFragment());
     }
+
+    public void  itemAddToCartOnClick(ItemProduct itemProduct){
+        AppDatabase appDatabase = AppDatabase.getAppDatabase(this);
+        OrderDao orderDao = appDatabase.orderDao();
+        OrderDetailDao orderDetailDao = appDatabase.orderDetailDao();
+        Order order = new Order();
+        OrderDetail orderDetail = new OrderDetail();
+        SharedPreferences sharedPreferences = getSharedPreferences("user_account", MODE_PRIVATE);
+
+        String userPhone = sharedPreferences.getString("userCurrentPhone",null);
+        String pass = sharedPreferences.getString("userCurrentPassword",null);
+        UserDao userDao = appDatabase.userDao();
+        User user = new User();
+
+        user= userDao.getUserByPhoneAndPassword(userPhone,pass);
+        order = orderDao.getOrderWithUserIdAndIsCheckOut(user.getUser_id(),0);
+        // check old user cart check out or not
+        // if check out then create a new cart
+        if(order==null){
+            Toast.makeText(this, "This is null!", Toast.LENGTH_SHORT).show();
+            Order orderInsert = new Order();
+            orderInsert.setUser_id(user.user_id);
+            orderInsert.setIsCheckOut(0);
+            orderDao.insertOrder(orderInsert);
+            // get order just added earlier
+            orderInsert = orderDao.getOrderWithUserIdAndIsCheckOut(user.getUser_id(),0);
+
+
+            orderDetail.setOrder_id(orderInsert.getOrder_id());
+            orderDetail.setProduct_id(itemProduct.getProduct_id());
+            orderDetail.setIn_cart_quantity(1);
+            orderDetailDao.insertOrderDetail(orderDetail);
+            Toast.makeText(this, "Add to cart successfully!", Toast.LENGTH_SHORT).show();
+        }
+        // if not check out get old cart id to add product
+        else {
+
+            orderDetail= orderDetailDao.getOrderDetailWithOrderIdAndProductId(order.getOrder_id(),itemProduct.getProduct_id());
+           //if OrderDetail is not exist
+            if(orderDetail==null) {
+                OrderDetail orderDetailInsert = new OrderDetail();
+                orderDetailInsert.setOrder_id(order.getOrder_id());
+                orderDetailInsert.setProduct_id(itemProduct.getProduct_id());
+                orderDetailInsert.setIn_cart_quantity(1);
+                orderDetailDao.insertOrderDetail(orderDetailInsert);
+                Toast.makeText(this, "Add to cart successfully!", Toast.LENGTH_SHORT).show();
+            }
+            //if OrderDetail is  exist
+            else{
+                Toast.makeText(this, "Product is exist in cart quantity increased by 1!", Toast.LENGTH_SHORT).show();
+                orderDetail.setIn_cart_quantity(orderDetail.getIn_cart_quantity()+1);
+                orderDetailDao.updateOrderDetail(orderDetail);
+            }
+        }
+
+    }
+
+    public void  deleteItemFromCartOnClick(OrderDetail orderDetail){
+        AppDatabase appDatabase = AppDatabase.getAppDatabase(this);
+        OrderDetailDao orderDetail1 = appDatabase.orderDetailDao();
+        orderDetail1.deleteOrderDetail(orderDetail);
+        Toast.makeText(this, "Delete successfully!", Toast.LENGTH_SHORT).show();
+        replaceFragment(new CartFragment());
+    }
+
+    public void  increaseItemQuantityFromCartOnClick(OrderDetail orderDetail){
+        AppDatabase appDatabase = AppDatabase.getAppDatabase(this);
+        OrderDetailDao orderDetail1 = appDatabase.orderDetailDao();
+        orderDetail.setIn_cart_quantity(orderDetail.getIn_cart_quantity()+1);
+        orderDetail1.updateOrderDetail(orderDetail);
+        replaceFragment(new CartFragment());
+    }
+
+    public void  decreaseItemQuantityFromCartOnClick(OrderDetail orderDetail){
+        AppDatabase appDatabase = AppDatabase.getAppDatabase(this);
+        OrderDetailDao orderDetail1 = appDatabase.orderDetailDao();
+        if(orderDetail.getIn_cart_quantity()-1<=0){
+            Toast.makeText(this, "Quantity can not be less than 1!", Toast.LENGTH_SHORT).show();
+        }else{
+            orderDetail.setIn_cart_quantity(orderDetail.getIn_cart_quantity()-1);
+            orderDetail1.updateOrderDetail(orderDetail);
+            replaceFragment(new CartFragment());
+        }
+
+
+    }
+
 }

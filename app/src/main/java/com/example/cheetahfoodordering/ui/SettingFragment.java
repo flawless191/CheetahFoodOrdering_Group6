@@ -2,6 +2,7 @@ package com.example.cheetahfoodordering.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 
 import com.example.cheetahfoodordering.MainActivity;
 import com.example.cheetahfoodordering.R;
-import com.example.cheetahfoodordering.activities.AddProductActivity;
+import com.example.cheetahfoodordering.activities.ChangePasswordActivity;
+import com.example.cheetahfoodordering.activities.LoginActivity;
+import com.example.cheetahfoodordering.activities.UserProfileActivity;
 import com.example.cheetahfoodordering.dao.ItemProductDao;
 import com.example.cheetahfoodordering.database.AppDatabase;
 import com.example.cheetahfoodordering.entity.ItemProduct;
@@ -23,8 +26,10 @@ import java.util.List;
 
 public class SettingFragment extends Fragment {
     TextView txtManage ;
+    TextView txtChangePassword ;
     private MainActivity mainActivity;
-
+    TextView txtLogOut ;
+    TextView txtUserProfile ;
     public SettingFragment() {
         // Required empty public constructor
     }
@@ -46,6 +51,31 @@ public class SettingFragment extends Fragment {
                 ItemProductDao itemProductDao = db.ItemProductDao();
         List<ItemProduct> itemProductList = itemProductDao.getAllProduct();
                 mainActivity.replaceFragment(new ManageProductFragment(itemProductList));
+            }
+        });
+        txtChangePassword = rootView.findViewById(R.id.txt_change_password);
+        txtChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(rootView.getContext(), ChangePasswordActivity.class));
+            }
+        });
+        txtLogOut = rootView.findViewById(R.id.txt_log_out);
+        txtLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = mainActivity.getSharedPreferences("user_account", mainActivity.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove("userCurrentPhone");
+                editor.remove("userCurrentPassword");
+                startActivity(new Intent(v.getContext(), LoginActivity.class));
+            }
+        });
+        txtUserProfile = rootView.findViewById(R.id.txt_user_profile);
+        txtUserProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), UserProfileActivity.class));
             }
         });
         return rootView;

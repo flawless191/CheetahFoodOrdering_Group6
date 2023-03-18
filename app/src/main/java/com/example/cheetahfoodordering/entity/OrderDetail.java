@@ -13,18 +13,21 @@ public class OrderDetail {
     private int order_id;
 
     private int product_id;
-    @ColumnInfo(name = "quantity")
+    @ColumnInfo(name = "in_cart_quantity")
 
-    private int quantity;
+    private int in_cart_quantity;
     @ColumnInfo(name = "unit_price")
 
     private float unit_price;
 
-    public OrderDetail(int order_id, int product_id, int quantity, float unit_price) {
+    public OrderDetail(int order_id, int product_id, int in_cart_quantity, float unit_price) {
         this.order_id = order_id;
         this.product_id = product_id;
-        this.quantity = quantity;
+        this.in_cart_quantity = in_cart_quantity;
         this.unit_price = unit_price;
+    }
+
+    public OrderDetail() {
     }
 
     public int getOrder_id() {
@@ -43,12 +46,12 @@ public class OrderDetail {
         this.product_id = product_id;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getIn_cart_quantity() {
+        return in_cart_quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setIn_cart_quantity(int in_cart_quantity) {
+        this.in_cart_quantity = in_cart_quantity;
     }
 
     public float getUnit_price() {

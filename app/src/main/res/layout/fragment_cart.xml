@@ -89,12 +89,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView27" />
+
     <TextView
-        android:id="@+id/textView9"
-        android:layout_width="119dp"
+        android:id="@+id/txt_total"
+        android:layout_width="127dp"
         android:layout_height="28dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="38dp"
+        android:scrollHorizontally="true"
         android:text="35.000 VND"
         android:textColor="#000000"
         android:textSize="20sp"
@@ -126,16 +128,16 @@
         app:layout_constraintTop_toBottomOf="@+id/recyclerItem" />
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_check_out"
         android:layout_width="209dp"
         android:layout_height="52dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/rectangle_4"
-        android:text="Checkout"
+        android:text="Check out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/txt_total"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView

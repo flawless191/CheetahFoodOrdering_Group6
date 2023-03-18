@@ -112,7 +112,12 @@ public class FavoriteFragment extends Fragment {
 
             @Override
             public void onClickFavorite(ItemProduct itemProduct) {
+                mainActivity.itemAddToFavoriteOnClick(itemProduct);
+            }
 
+            @Override
+            public void onClickAddToCart(ItemProduct itemProduct) {
+                mainActivity.itemAddToCartOnClick(itemProduct);
             }
         },rootView.getContext());
         recyclerViewItemPopular.setAdapter(itemProductAdapter);

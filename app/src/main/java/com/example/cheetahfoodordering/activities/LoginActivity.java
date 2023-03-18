@@ -2,6 +2,7 @@ package com.example.cheetahfoodordering.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edt_phone;
     private EditText edt_password;
     private CheckBox cb_remember;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         edt_phone= findViewById(R.id.edt_login_phone);
-        edt_password = findViewById(R.id.edt_login_password);
+        edt_password = findViewById(R.id.edt_old_password);
         cb_remember = findViewById(R.id.che_remember);
         SharedPreferences sharedPreferences = getSharedPreferences("user_account", MODE_PRIVATE);
         if (sharedPreferences.getString("userRememberPhone",null)!=null){
