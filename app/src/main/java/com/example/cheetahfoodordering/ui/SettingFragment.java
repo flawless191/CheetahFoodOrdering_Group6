@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cheetahfoodordering.MainActivity;
 import com.example.cheetahfoodordering.R;
@@ -18,8 +19,10 @@ import com.example.cheetahfoodordering.activities.ChangePasswordActivity;
 import com.example.cheetahfoodordering.activities.LoginActivity;
 import com.example.cheetahfoodordering.activities.UserProfileActivity;
 import com.example.cheetahfoodordering.dao.ItemProductDao;
+import com.example.cheetahfoodordering.dao.UserDao;
 import com.example.cheetahfoodordering.database.AppDatabase;
 import com.example.cheetahfoodordering.entity.ItemProduct;
+import com.example.cheetahfoodordering.entity.User;
 
 import java.util.List;
 
@@ -48,9 +51,22 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AppDatabase db = AppDatabase.getAppDatabase(rootView.getContext());
-                ItemProductDao itemProductDao = db.ItemProductDao();
-        List<ItemProduct> itemProductList = itemProductDao.getAllProduct();
-                mainActivity.replaceFragment(new ManageProductFragment(itemProductList));
+
+                SharedPreferences sharedPreferences = mainActivity.getSharedPreferences("user_account", mainActivity.MODE_PRIVATE);
+
+                String userPhone = sharedPreferences.getString("userCurrentPhone",null);
+                String pass = sharedPreferences.getString("userCurrentPassword",null);
+                UserDao userDao = db.userDao();
+                User user = new User();
+                user= userDao.getUserByPhoneAndPassword(userPhone,pass);
+                if (user.getIsAdmin().equals("1") ){
+                    ItemProductDao itemProductDao = db.ItemProductDao();
+                    List<ItemProduct> itemProductList = itemProductDao.getAllProduct();
+                    mainActivity.replaceFragment(new ManageProductFragment(itemProductList));
+                }else{
+                    Toast.makeText(v.getContext(), "You can't manage product", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         txtChangePassword = rootView.findViewById(R.id.txt_change_password);
