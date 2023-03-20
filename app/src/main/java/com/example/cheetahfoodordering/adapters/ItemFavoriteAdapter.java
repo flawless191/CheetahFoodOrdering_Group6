@@ -64,11 +64,7 @@ public class ItemFavoriteAdapter extends RecyclerView.Adapter<ItemFavoriteAdapte
             }
         });
 
-        holder.img_cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+
     }
 
     @Override
@@ -95,7 +91,6 @@ public class ItemFavoriteAdapter extends RecyclerView.Adapter<ItemFavoriteAdapte
             product_price = itemView.findViewById(R.id.text_item_price);
             product_description = itemView.findViewById(R.id.text_description);
             img_delete = itemView.findViewById(R.id.img_delete);
-            img_cart = itemView.findViewById(R.id.img_cart);
 
         }
     }

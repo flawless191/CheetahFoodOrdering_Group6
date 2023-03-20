@@ -179,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
         // check old user cart check out or not
         // if check out then create a new cart
         if(order==null){
-            Toast.makeText(this, "This is null!", Toast.LENGTH_SHORT).show();
             Order orderInsert = new Order();
             orderInsert.setUser_id(user.user_id);
             orderInsert.setIsCheckOut(0);
