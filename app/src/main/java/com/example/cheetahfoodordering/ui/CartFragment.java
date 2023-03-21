@@ -8,16 +8,20 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cheetahfoodordering.MainActivity;
 import com.example.cheetahfoodordering.R;
 import com.example.cheetahfoodordering.adapters.ItemCartAdapter;
+import com.example.cheetahfoodordering.dao.ItemProductDao;
 import com.example.cheetahfoodordering.dao.OrderDao;
 import com.example.cheetahfoodordering.dao.UserDao;
 import com.example.cheetahfoodordering.database.AppDatabase;
@@ -98,7 +102,21 @@ public class CartFragment extends Fragment {
                 mainActivity.replaceFragment(new CartFragment());
             }
         });
-
+        EditText edt_search = rootView.findViewById(R.id.edt_search);
+        ((ImageView)rootView.findViewById(R.id.img_search)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(edt_search.getText().toString())){
+                    Toast.makeText(v.getContext(), "Please enter search value", Toast.LENGTH_SHORT).show();
+                }else {
+                    mainActivity = (MainActivity) getActivity();
+                    String productNameSearch = "%" + edt_search.getText().toString()+"%";
+                    ItemProductDao itemProductDao = db.ItemProductDao();
+                    List<ItemProduct> listSearch = itemProductDao.getListSearchProduct(productNameSearch);
+                    mainActivity.replaceFragment(new HomeFragment(listSearch));
+                }
+            }
+        });
         return rootView;
     }
 

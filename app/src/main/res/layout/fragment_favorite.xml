@@ -86,10 +86,11 @@
         android:id="@+id/txt_number_in_list"
         android:layout_width="210dp"
         android:layout_height="25dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="20dp"
         android:text="1 item in favorite list"
         android:textColor="#000000"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView27"
         app:layout_constraintStart_toEndOf="@+id/imageView27"
         app:layout_constraintTop_toTopOf="@+id/imageView27" />
 

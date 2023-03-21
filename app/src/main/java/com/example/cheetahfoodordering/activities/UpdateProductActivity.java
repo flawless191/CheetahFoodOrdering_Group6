@@ -2,9 +2,16 @@ package com.example.cheetahfoodordering.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,10 +23,21 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.cheetahfoodordering.MainActivity;
 import com.example.cheetahfoodordering.R;
+import com.example.cheetahfoodordering.dao.FavoriteDao;
 import com.example.cheetahfoodordering.dao.ItemProductDao;
+import com.example.cheetahfoodordering.dao.OrderDao;
+import com.example.cheetahfoodordering.dao.UserDao;
 import com.example.cheetahfoodordering.database.AppDatabase;
+import com.example.cheetahfoodordering.entity.Favorite;
 import com.example.cheetahfoodordering.entity.ItemProduct;
+import com.example.cheetahfoodordering.entity.OrderWithOrderDetailAndProduct;
+import com.example.cheetahfoodordering.entity.User;
+import com.example.cheetahfoodordering.ui.CartFragment;
+import com.example.cheetahfoodordering.ui.ManageProductFragment;
+
+import java.util.List;
 
 public class UpdateProductActivity extends AppCompatActivity {
     private EditText edt_product_name;
@@ -31,18 +49,24 @@ public class UpdateProductActivity extends AppCompatActivity {
     private RadioButton radioButton;
     RadioGroup radioGroup ;
     private ImageView img_item_manage;
-    Button btn_delete;
-    Button btn_update;
+    private MainActivity mainActivity ;
+
+
+
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_edit_item);
+
         ((ImageView)findViewById(R.id.img_click_back)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+              onBackPressed();
+
             }
         });
         ItemProduct itemProduct = (ItemProduct)getIntent().getExtras().get("obj_item_manage");
@@ -72,6 +96,7 @@ public class UpdateProductActivity extends AppCompatActivity {
                 radioButton.setChecked(true);
                 break;
         }
+        edt_product_image.setText(itemProduct.getProduct_image());
         edt_product_name.setText(itemProduct.getProduct_name());
         edt_product_price.setText(itemProduct.getProduct_price()+"");
         edt_product_description.setText(itemProduct.getProduct_description());
@@ -144,10 +169,16 @@ public class UpdateProductActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         AppDatabase appDatabase = AppDatabase.getAppDatabase(v.getContext());
                         ItemProductDao itemProductDao = appDatabase.ItemProductDao();
+                        FavoriteDao favoriteDao = appDatabase.favoriteDao();
+                        List<Favorite> favoriteWithProductList = favoriteDao.getFavoriteWithProductId(itemProduct.getProduct_id());
+                        OrderDao orderDao = appDatabase.orderDao();
+                        List<OrderWithOrderDetailAndProduct> orderWithOrderDetailAndProducts = orderDao.getAllProductInOrderWithProductId(itemProduct.getProduct_id());
+                        if(orderWithOrderDetailAndProducts.isEmpty()&&favoriteWithProductList.isEmpty())
                         itemProductDao.deleteProduct(itemProduct);
+                        else Toast.makeText(v.getContext(), "Can not delete this product!", Toast.LENGTH_SHORT).show();
                     }
                 });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() { 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         return;

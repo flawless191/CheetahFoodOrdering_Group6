@@ -5,6 +5,7 @@ import androidx.room.Room;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,11 +17,13 @@ import com.example.cheetahfoodordering.dao.CategoryDao;
 import com.example.cheetahfoodordering.dao.FavoriteDao;
 import com.example.cheetahfoodordering.dao.ItemProductDao;
 import com.example.cheetahfoodordering.dao.OrderDao;
+import com.example.cheetahfoodordering.dao.UserDao;
 import com.example.cheetahfoodordering.database.AppDatabase;
 import com.example.cheetahfoodordering.entity.Category;
 import com.example.cheetahfoodordering.entity.FavoriteWithProduct;
 import com.example.cheetahfoodordering.entity.ItemProduct;
 import com.example.cheetahfoodordering.entity.OrderWithOrderDetailAndProduct;
+import com.example.cheetahfoodordering.entity.User;
 
 import java.util.List;
 

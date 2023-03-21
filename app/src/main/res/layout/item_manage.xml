@@ -7,7 +7,7 @@
     android:layout_marginTop="10dp"
     android:layout_marginEnd="10dp"
     app:cardBackgroundColor="#D1DBE4"
-
+    android:id="@+id/manage_item"
     app:cardCornerRadius="6dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -83,13 +83,15 @@
 
         <TextView
             android:id="@+id/text_description"
-            android:layout_width="214dp"
-            android:layout_height="37dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="193dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="5dp"
             android:text="Big burger with cheese, lettuce, tomato, onions and special sauce"
             android:textColor="#726C6C"
-            app:layout_constraintStart_toStartOf="@+id/text_item_price"
-            app:layout_constraintTop_toBottomOf="@+id/text_item_price" />
+            app:layout_constraintStart_toEndOf="@+id/imageView42"
+            app:layout_constraintTop_toBottomOf="@+id/text_item_price"
+            tools:ignore="NotSibling" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

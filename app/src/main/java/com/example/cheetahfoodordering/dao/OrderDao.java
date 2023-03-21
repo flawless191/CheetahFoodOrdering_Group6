@@ -27,4 +27,6 @@ public interface OrderDao {
     Order getOrderWithUserIdAndIsCheckOut(int userId, int isCheckOut);
     @Query("SELECT * FROM orders INNER JOIN order_details ON orders.order_id = order_details.order_id INNER JOIN itemproducts ON itemproducts.product_id = order_details.product_id WHERE orders.user_id = :userId AND orders.isCheckOut = :isCheckOut")
     List<OrderWithOrderDetailAndProduct> getProductInCartWithUserId(int userId, int isCheckOut);
+    @Query("SELECT * FROM orders INNER JOIN order_details ON orders.order_id = order_details.order_id INNER JOIN itemproducts ON itemproducts.product_id = order_details.product_id  WHERE itemproducts.product_id =:productId")
+    List<OrderWithOrderDetailAndProduct> getAllProductInOrderWithProductId(int productId);
 }

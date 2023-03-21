@@ -1,5 +1,7 @@
 package com.example.cheetahfoodordering;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,15 +27,18 @@ import com.example.cheetahfoodordering.dao.OrderDetailDao;
 import com.example.cheetahfoodordering.dao.UserDao;
 import com.example.cheetahfoodordering.database.AppDatabase;
 import com.example.cheetahfoodordering.entity.Favorite;
+import com.example.cheetahfoodordering.entity.FavoriteWithProduct;
 import com.example.cheetahfoodordering.entity.ItemProduct;
 import com.example.cheetahfoodordering.entity.Order;
 import com.example.cheetahfoodordering.entity.OrderDetail;
+import com.example.cheetahfoodordering.entity.OrderWithOrderDetailAndProduct;
 import com.example.cheetahfoodordering.entity.User;
 import com.example.cheetahfoodordering.ui.CartFragment;
 import com.example.cheetahfoodordering.ui.FavoriteFragment;
 import com.example.cheetahfoodordering.ui.HistoryOrderFragment;
 import com.example.cheetahfoodordering.ui.HomeFragment;
 import com.example.cheetahfoodordering.ui.ItemDetailFragment;
+import com.example.cheetahfoodordering.ui.ManageProductFragment;
 import com.example.cheetahfoodordering.ui.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -44,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView foodType;
     FragmentManager fragmentManage;
     FragmentTransaction fragmentTransaction;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentManage = getSupportFragmentManager();
         fragmentTransaction = fragmentManage.beginTransaction();
         fragmentTransaction.replace( R.id.frame_layout, fragment);
+        fragmentTransaction.setReorderingAllowed(true);
+        fragmentTransaction.addToBackStack("backFragment");
         fragmentTransaction.commit();
 
     }
@@ -104,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     public void  onClickItemDetail(ItemProduct itemProduct){
         fragmentManage = getSupportFragmentManager();
         fragmentTransaction = fragmentManage.beginTransaction();
-        ItemDetailFragment itemDetailFragment = new ItemDetailFragment();
+        ItemDetailFragment itemDetailFragment = new ItemDetailFragment(1);
         Bundle bundle = new Bundle();
         bundle.putSerializable("obj_item",itemProduct);
         itemDetailFragment.setArguments(bundle);
@@ -245,5 +254,61 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void  itemAddToCartOnClickWithQuantity(ItemProduct itemProduct, int quantity){
+        AppDatabase appDatabase = AppDatabase.getAppDatabase(this);
+        OrderDao orderDao = appDatabase.orderDao();
+        OrderDetailDao orderDetailDao = appDatabase.orderDetailDao();
+        Order order = new Order();
+        OrderDetail orderDetail = new OrderDetail();
+        SharedPreferences sharedPreferences = getSharedPreferences("user_account", MODE_PRIVATE);
+
+        String userPhone = sharedPreferences.getString("userCurrentPhone",null);
+        String pass = sharedPreferences.getString("userCurrentPassword",null);
+        UserDao userDao = appDatabase.userDao();
+        User user = new User();
+
+        user= userDao.getUserByPhoneAndPassword(userPhone,pass);
+        order = orderDao.getOrderWithUserIdAndIsCheckOut(user.getUser_id(),0);
+        // check old user cart check out or not
+        // if check out then create a new cart
+        if(order==null){
+            Order orderInsert = new Order();
+            orderInsert.setUser_id(user.user_id);
+            orderInsert.setIsCheckOut(0);
+            orderDao.insertOrder(orderInsert);
+            // get order just added earlier
+            orderInsert = orderDao.getOrderWithUserIdAndIsCheckOut(user.getUser_id(),0);
+
+
+            orderDetail.setOrder_id(orderInsert.getOrder_id());
+            orderDetail.setProduct_id(itemProduct.getProduct_id());
+            orderDetail.setIn_cart_quantity(quantity);
+            orderDetailDao.insertOrderDetail(orderDetail);
+            Toast.makeText(this, "Add to cart successfully!", Toast.LENGTH_SHORT).show();
+        }
+        // if not check out get old cart id to add product
+        else {
+
+            orderDetail= orderDetailDao.getOrderDetailWithOrderIdAndProductId(order.getOrder_id(),itemProduct.getProduct_id());
+            //if OrderDetail is not exist
+            if(orderDetail==null) {
+                OrderDetail orderDetailInsert = new OrderDetail();
+                orderDetailInsert.setOrder_id(order.getOrder_id());
+                orderDetailInsert.setProduct_id(itemProduct.getProduct_id());
+                orderDetailInsert.setIn_cart_quantity(quantity);
+                orderDetailDao.insertOrderDetail(orderDetailInsert);
+                Toast.makeText(this, "Add to cart successfully!", Toast.LENGTH_SHORT).show();
+            }
+            //if OrderDetail is  exist
+            else{
+                Toast.makeText(this, "Add to cart successfully!", Toast.LENGTH_SHORT).show();
+                orderDetail.setIn_cart_quantity(orderDetail.getIn_cart_quantity()+quantity);
+                orderDetailDao.updateOrderDetail(orderDetail);
+            }
+        }
+
+    }
+
 
 }

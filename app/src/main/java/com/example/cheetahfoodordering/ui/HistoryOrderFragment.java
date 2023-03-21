@@ -83,6 +83,7 @@ public class HistoryOrderFragment extends Fragment {
             }
         },rootView.getContext());
         recyclerViewItemPopular.setAdapter(itemProductAdapter);
+
         return rootView;
 
     }

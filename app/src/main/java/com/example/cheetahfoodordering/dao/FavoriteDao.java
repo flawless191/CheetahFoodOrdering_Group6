@@ -24,5 +24,7 @@ public interface FavoriteDao {
     List<FavoriteWithProduct> getAllProductInFavoriteWithUserId(int userId);
     @Query("SELECT * FROM favorite WHERE user_id = :userId AND product_id = :productId")
     Favorite getFavoriteWithUserIdAndProductId(int userId, int productId);
+    @Query("SELECT * FROM favorite WHERE product_id =:productId")
+    List<Favorite> getFavoriteWithProductId(int productId);
 
 }
